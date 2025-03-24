@@ -5,6 +5,7 @@ const Match = require('../models/matchModel');
 const getMatches = async (req, res) => {
     try {
         const matches = await Match.findAll();
+        console.log(matches);
         res.status(200).json(matches);
     } catch (error) {
         res.status(500).json({ message: 'Error fetching matches', error });

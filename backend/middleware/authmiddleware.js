@@ -2,20 +2,20 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-// Middleware to verify JWT token
+
+
 const authenticateUser = (req, res, next) => {
-    const token = req.header('Authorization');
-    if (!token) return res.status(401).json({ message: 'Access Denied: No Token Provided' });
+    const token = req.header("Authorization")?.split(" ")[1];
+    if (!token) return res.status(401).json({ message: "Unauthorized: No token provided" });
 
     try {
-        const verified = jwt.verify(token.replace('Bearer ', ''), process.env.JWT_SECRET);
-        req.user = verified;
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded;
         next();
-    } catch (err) {
-        res.status(400).json({ message: 'Invalid Token' });
+    } catch (error) {
+        res.status(401).json({ message: "Invalid token" });
     }
 };
-
 // Middleware to verify Admin role
 const authenticateAdmin = (req, res, next) => {
     authenticateUser(req, res, () => {

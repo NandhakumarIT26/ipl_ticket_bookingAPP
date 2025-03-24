@@ -5,6 +5,14 @@ const { createMatch, getMatches, updateMatch, deleteMatch } = require('../contro
 
 const router = express.Router();
 
+
+
+
+router.put("/update/:matchId", authenticateAdmin, updateMatch);
+router.delete("/delete/:matchId", authenticateAdmin, deleteMatch);
+
+module.exports = router;
+
 // Get all matches (Public route)
 router.get('/', getMatches);
 
