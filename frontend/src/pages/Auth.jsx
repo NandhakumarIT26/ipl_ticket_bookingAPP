@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../api/apiservice"; // ✅ Import from apiService.js
 import AuthContext from "../context/AuthContext";
 import Input from "../components/Input";
-import Button from "../components/Button";
+import Button from "../components/button";
 
 const Auth = () => {
     const [email, setEmail] = useState("");
